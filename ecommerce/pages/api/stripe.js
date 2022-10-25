@@ -18,7 +18,7 @@ const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    console.log(req.body.cartItems); // the console.log will show in the terminal
+    // console.log(req.body); // the console.log will show in the terminal
     try {
       const params = {
         // recommanded selections
@@ -28,8 +28,8 @@ export default async function handler(req, res) {
         billing_address_collection: "auto",
         // SHIPPING RATE: https://dashboard.stripe.com/test/shipping-rates/shr_1Lwim8IBLZb9YDRI9LqSsZzj
         shipping_options: [
-          { shipping_rate: "shr_1Lwim8IBLZb9YDRI9LqSsZzj" }, // COLLECT
-          { shipping_rate: "shr_1LwincIBLZb9YDRIzKVzFRXT" }, // EXPRESS - FAST SHIPPING
+          { shipping_rate: "shr_1LwkG4IBLZb9YDRI4DyOCvhP" }, // COLLECT
+          { shipping_rate: "shr_1LwincIBLZb9YDRIzKVzFRXT" }, // FAST SHIPPING
         ],
         /* 
             get each item

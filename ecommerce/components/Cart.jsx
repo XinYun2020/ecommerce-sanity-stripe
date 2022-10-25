@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 
 import { useStateContext } from "../context/StateContext";
 import { urlFor } from "../lib/client";
-import getStript from "../lib/getStripe";
+import getStripe from "../lib/getStripe";
 
 const Cart = () => {
   const cartRef = useRef();
@@ -26,13 +26,13 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     // get the instance of the STRIPE promise
-    const stripe = await getStript();
+    const stripe = await getStripe();
 
     // Create response: make request to the backend
     const response = await fetch("/api/stripe", {
       // can also use axios
       method: "POST",
-      header: {
+      headers: {
         "Content-Type": "application/json",
       },
       // sendign the body with the request
