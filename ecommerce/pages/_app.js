@@ -1,15 +1,20 @@
 import React from "react";
 import { Layout } from "../components";
 import "../styles/globals.css";
+import { StateContext } from "../context/StateContext";
+import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <div className=" bg-white">
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </div>
+      <StateContext>
+        <div className=" bg-white">
+          <Layout>
+            <Toaster />
+            <Component {...pageProps} />
+          </Layout>
+        </div>
+      </StateContext>
     </>
   );
 }

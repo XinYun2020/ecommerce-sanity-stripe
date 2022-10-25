@@ -7,12 +7,14 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { Product } from "../../components";
+import { useStateContext } from "../../context/StateContext";
 
 const ProductDetails = ({ product, products }) => {
   // destructure
   const { image, name, details, price } = product;
   //
   const [index, setIndex] = useState(0);
+  const { decQty, incQty, qty, onAdd } = useStateContext();
 
   return (
     <div>
@@ -57,14 +59,14 @@ const ProductDetails = ({ product, products }) => {
             <p className="quantity-desc">
               <span
                 className="minus"
-                // onClick={decQty}
+                onClick={decQty}
               >
                 <AiOutlineMinus />
               </span>
-              <span className="num">{"qty"}</span>
+              <span className="num">{qty}</span>
               <span
                 className="plus"
-                // onClick={incQty}
+                onClick={incQty}
               >
                 <AiOutlinePlus />
               </span>
@@ -74,7 +76,7 @@ const ProductDetails = ({ product, products }) => {
             <button
               type="button"
               className="add-to-cart"
-              //   onClick={() => onAdd(product, qty)}
+              onClick={() => onAdd(product, qty)}
             >
               Add to Cart
             </button>
@@ -92,7 +94,13 @@ const ProductDetails = ({ product, products }) => {
       <div className="maylike-products-wrapper">
         <h2>You may also like</h2>
         <div className="marquee">
-          <div className="maylike-products-container track">
+          <div
+            className={
+              products.length > 3
+                ? `maylike-products-container track`
+                : `maylike-products-container`
+            }
+          >
             {/* track will make the marquee move around, animation */}
             {products.map((item) => (
               <Product
