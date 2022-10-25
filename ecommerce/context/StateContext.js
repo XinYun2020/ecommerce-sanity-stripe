@@ -36,12 +36,17 @@ export const StateContext = ({ children }) => {
           };
       });
       setCartItems(updatedCartItems);
+      localStorage.setItem("cart", JSON.stringify(updatedCartItems));
       // show toast success
     } else {
       // if the item is not yet in the cart
       product.quantity = quantity; // = new quantity
 
       setCartItems([...cartItems, { ...product }]); // add the new product to the cart
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([...cartItems, { ...product }])
+      );
     }
     toast.success(`${quantity} ${product.name} added to the cart.`);
   };
